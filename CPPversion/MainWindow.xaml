@@ -1,0 +1,111 @@
+<Window
+    x:Class="FolderCreator.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FolderCreator"
+    Title="文件夹批量创建工具" 
+    Height="600" Width="700"
+    WindowStartupLocation="CenterScreen">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 标题 -->
+        <TextBlock Grid.Row="0" 
+                   Text="文件夹批量创建工具-by MVP" 
+                   FontSize="24"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center" 
+                   Margin="0,0,0,20"/>
+
+        <!-- 文件夹名称输入 -->
+        <GroupBox Grid.Row="1" Header="文件夹名称" Margin="0,0,0,15">
+            <TextBox x:Name="FolderNameTextBox" 
+                     Margin="5"
+                     Padding="3"/>
+        </GroupBox>
+
+        <!-- 数量输入 -->
+        <GroupBox Grid.Row="2" Header="创建数量" Margin="0,0,0,15">
+            <TextBox x:Name="CountTextBox" 
+                     Margin="5"
+                     Padding="3"
+                     PreviewTextInput="CountTextBox_PreviewTextInput"/>
+        </GroupBox>
+
+        <!-- 保存路径选择 -->
+        <GroupBox Grid.Row="3" Header="保存路径" Margin="0,0,0,15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="PathTextBox" 
+                         Margin="5"
+                         Padding="3"
+                         IsReadOnly="True"/>
+                <Button Grid.Column="1" 
+                        x:Name="BrowseButton"
+                        Content="浏览"
+                        Margin="5"
+                        Padding="5,0"
+                        Click="BrowseButton_Click"/>
+            </Grid>
+        </GroupBox>
+
+        <!-- 操作按钮 -->
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,20">
+            <Button x:Name="CreateButton" 
+                    Content="创建文件夹" 
+                    Margin="10,0"
+                    Width="120"
+                    Height="30"
+                    Click="CreateButton_Click"/>
+            <Button x:Name="ResetButton" 
+                    Content="重置" 
+                    Margin="10,0"
+                    Width="120"
+                    Height="30"
+                    Click="ResetButton_Click"/>
+        </StackPanel>
+
+        <!-- 日志显示区域 -->
+        <GroupBox Grid.Row="5" Header="操作日志" Margin="0,0,0,15">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <ScrollViewer Grid.Row="0" 
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Auto"
+                              Margin="5">
+                    <TextBlock x:Name="LogTextBlock" 
+                               TextWrapping="NoWrap"
+                               FontFamily="Consolas"/>
+                </ScrollViewer>
+                
+                <ProgressBar x:Name="MainProgressBar" 
+                             Grid.Row="1"
+                             Height="20"
+                             Visibility="Collapsed"
+                             Margin="5,5,5,5"/>
+            </Grid>
+        </GroupBox>
+
+        <!-- 状态栏 -->
+        <StatusBar Grid.Row="6">
+            <StatusBarItem>
+                <TextBlock x:Name="StatusTextBlock" Text="就绪"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
